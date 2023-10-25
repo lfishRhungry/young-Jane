@@ -87,7 +87,7 @@ dataset.drop(labels=number_features_name, axis=1, inplace=True)
 dataset.reset_index(drop=True, inplace=True)
 dataset = pd.concat([number_features, dataset], axis=1)
 
-# ---------------------training
+# ---------------------split dataset
 train = dataset.drop(["is_https"], axis=1)
 X_train, X_test, y_train, y_test = train_test_split(
     train,
@@ -97,6 +97,8 @@ X_train, X_test, y_train, y_test = train_test_split(
     stratify=dataset["is_https"],
 )
 
+
+# -----------------------random forest classifier
 model = RandomForestClassifier()  # 实例化模型RandomForestClassifier
 model.fit(X_train, y_train)  # 在训练集上训练模型
 print(model)  # 输出模型RandomForestClassifier
